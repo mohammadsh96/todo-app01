@@ -13,7 +13,8 @@ const ToDo = () => {
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
 
-  const [list, setList] = useState([]);
+  const [savedNotes] = useState(localStorage.getItem('list'))
+  const [list, setList] = useState(savedNotes ? JSON.parse(savedNotes) : []);
   const [incomplete, setIncomplete] = useState([]);
   const [sort, setSort] = useState(false);
   const settings = useContext(SettingsContext);
@@ -23,8 +24,24 @@ const ToDo = () => {
     item.id = uuid();
     item.complete = false;
     setList([...list, item]);
+
   }
 
+
+
+  //local storage
+  useEffect(() => {
+   localStorage.setItem('list', JSON.stringify(list));
+
+  },[list]);
+useEffect(()=>{
+
+  const LocalStorageData = JSON.parse(localStorage.getItem('list'))
+  setList([...list] , LocalStorageData)
+},[list])
+
+
+  //delete todo item 
   function deleteItem(id) {
     const items = list.filter( item => item.id !== id );
     setList(items);
@@ -80,8 +97,8 @@ const ToDo = () => {
     );
     setItemOffset(newOffset);
     };
+    
 
-  
   return (
     <>
       <header>
@@ -92,14 +109,15 @@ const ToDo = () => {
       <Form addItem={addItem}  handleSort={handleSort}/>
       </Card>
       <br></br>
-      <div className='list-container'>
+        {currentItems.length ? <div className='list-container'>
       {currentItems.map(item => (
-        <List item={item} deleteItem={deleteItem} toggleComplete={toggleComplete} />
+        <List key ={item.id} item={item} deleteItem={deleteItem} toggleComplete={toggleComplete} />
        ))}
-      </div>
+      </div> : <h2>there is nothing in the list  </h2> }
+      
      
       </div>
-      <div className='pag'>
+      <div className='pag' >
          <ReactPaginate
         breakLabel="..."
         nextLabel="next >"

@@ -1,17 +1,14 @@
 import React  from 'react';
-// import {useContext} from 'react'
-import {useState} from 'react'
-
-// import { Button , Navbar ,Alignment} from "@blueprintjs/core";
+import {useState } from 'react'
+// import LoginContext from '../../../context/auth/contextAuth'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-// import Button from 'react-bootstrap/Button';
-// import { ThemeContext } from '../../../context/Theme';
+
 export default function Header(){
-  // static contextType = ThemeContext;
-// const context = useContext(ThemeContext);
-const [user , setUser] =useState({})
+// const context =useContext(LoginContext)
+  const [user , setUser] =useState({});
+
 const handleLogin =(e)=>{
   e.preventDefault();
   console.log(e.target.username.value);
@@ -22,7 +19,7 @@ const handleLogin =(e)=>{
     password : e.target.password.value,
   }
   setUser(user)
-  // console.log(user);
+  
 if(user.username ==="mohammad"&& user.password==="123"){
 
   alert("welcome mohammad")
@@ -40,17 +37,17 @@ console.log(user);
            <Container>
              <Navbar.Brand href="#home">To DO</Navbar.Brand>
              <Nav className="me-auto">
-               <Nav.Link href="#home">Home</Nav.Link>
+               {/* <Nav.Link href="#home">Home</Nav.Link>
                <form onSubmit={handleLogin} >
                <input type="text" placeholder="username" name="username"></input>
                <input type="password" placeholder="password" name="password"></input>
                <button className="btn1" type="submit"  >Login</button>
              
-              </form>
+              </form> */}
               <h5 id="head"> not a user !? signup here </h5>
               <form  >
-               <input type="text" placeholder="username" name="username"></input>
-               <input type="password" placeholder="password" name="password"></input>
+               <input type="text" placeholder="not working yet" name="username"></input>
+               <input type="password" placeholder="not working yet" name="password"></input>
               <button className="btn1" type ="submit" href="register" >signup</button>
              
               </form>
