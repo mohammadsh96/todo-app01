@@ -80,4 +80,3 @@ export default function LoginProvider(props) {
         </LoginContext.Provider>
     )
 }
-Footer

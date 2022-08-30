@@ -4,13 +4,14 @@ import {When} from 'react-if';
 import { LoginContext } from './contextAuth';
 
 class Auth extends React.Component {
+ 
 
   static contextType = LoginContext;
 
   render() {
 
-    const isLoggedIn = this.context.loggedIn;
-    const canDo = this.props.capability ? this.context.can(this.props.capability) : true;
+    const isLoggedIn = this.context.loginStatus;
+    const canDo = this.props.actions ? this.context.canDo(this.props.actions) : true;
     const okToRender = isLoggedIn && canDo;
 
     return (

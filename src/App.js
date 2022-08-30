@@ -8,7 +8,7 @@ import Footer from '../src/component/basic/Footer/Footer'
 import Auth from './context/auth/auth';
 import Login from './context/auth/login';
 import LoginContext from './context/auth/contextAuth';
-function App() {
+function App(props) {
   return (
       <>     
        <Header/>
@@ -18,23 +18,28 @@ function App() {
  
  <Login />
 
+ <Auth actions="read">
+                <div>
+                    <h4>
+                        for testing purposes  ,regular user [read capability ] <br></br> can't do anything in the website.
+                        <br></br> <span className="warn">login with the administrator ...    shihab  : 123 </span>
+                    </h4>
+                </div>
+            </Auth>
+ 
 
- <Auth>
-   <div>Any valid user can see this</div>
- </Auth>
-
- <Auth capability="create">
+ <Auth actions="create">
    <div>Users with create access can see this</div>
       <Settings>
          <ToDo />
       </Settings>
  </Auth>
 
- <Auth capability="update">
+ <Auth actions="update">
    <div>Users with update access can see this</div>
  </Auth>
 
- <Auth capability="delete">
+ <Auth actions="delete">
    <div>Users with delete access can see this</div>
  </Auth>
 
