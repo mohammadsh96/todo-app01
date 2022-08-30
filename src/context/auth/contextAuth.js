@@ -3,7 +3,7 @@ import superagent from 'superagent';
 import base64 from 'base-64';
 import jwt from 'jsonwebtoken';
 import cookie from 'react-cookies';
-
+import axios from 'axios';
 export const LoginContext = React.createContext();
 const API = `https://hiservice.herokuapp.com`
 export default function LoginProvider(props) {
@@ -24,6 +24,22 @@ export default function LoginProvider(props) {
             setUser({})
         }
     }, []);
+
+    const SignUpFunction =async (username, password) => {
+      try {
+        console.log("hello from sign up : ");
+          // const response = await superagent.post(`${API}/users/signup`).set( ` ${base64.decode(`${username}:${password}`)}`);
+          // console.log('body >>> ', response);
+         
+         const userData = { username:`${username}`, password:`${password}`}
+          // validateMyUser(response.body);
+        axios.post('https://hiservice.herokuapp.com/users/signup' , userData)
+       
+.then(console.log(userData) ,alert("try to login now"))
+      } catch (err) {
+alert(err)
+      }
+  }
     const loginFunction = async (username, password) => {
         try {
             const response = await superagent.post(`${API}/users/login`).set('authorization', `Basic ${base64.encode(`${username}:${password}`)}`);
@@ -69,6 +85,7 @@ export default function LoginProvider(props) {
     }
     const state = {
         loginStatus: loginStatus,
+        SignUpFunction:SignUpFunction,
         loginFunction: loginFunction,
         logoutFunction: logoutFunction,
         user: user,

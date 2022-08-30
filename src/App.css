@@ -136,3 +136,9 @@ font-size:15px;
   color: #fff;
   cursor:progress;
 }
+.warn{
+
+color : red;
+background-color: #fff;
+
+}
